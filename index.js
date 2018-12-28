@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const TOKEN = 'NTI1MDM0MDgwNDI1ODY5MzE0.Dvwxlw.9g_h_lTuxanfQeUc-NUVZh8Fxwk';
+const TOKEN = '';
 
 const pugSize = 6; // Maximum amount of players in the PUG
 var pugMembers = ["person1", "person2", "person3", "person4","person5"]; // Array to hold the members in the PUG
