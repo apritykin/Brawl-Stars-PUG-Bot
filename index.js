@@ -3,7 +3,9 @@ const client = new Discord.Client();
 const TOKEN = 'NTI1MDM0MDgwNDI1ODY5MzE0.Dvwxlw.9g_h_lTuxanfQeUc-NUVZh8Fxwk';
 
 const pugSize = 6; // Maximum amount of players in the PUG
-var pugMembers = []; // Array to hold the members in the PUG
+var pugMembers = ["person1", "person2", "person3", "person4","person5"]; // Array to hold the members in the PUG
+var teamA = [];
+var teamB = [];
 
 function checkPugSize(){
     if (pugMembers.length == 6){
@@ -17,7 +19,7 @@ function checkPugSize(){
 function addUserPug(msg){
     // console.log(msg.author);
     // Add user to the pugMembers Array if the array is not full
-    if (pugMembers.length <= 5){
+    if (pugMembers.length <= 4){
         pugMembers.push(msg.author.username);
         msg.channel.send(`${msg.author} added to queue ${pugMembers.length}/6.`); // Mention the user that they are added into the queue
         // msg.reply(' added to queue. ' + `${pugMembers.length}/6`);
@@ -25,11 +27,43 @@ function addUserPug(msg){
         .then(msg => console.log(pugMembers))
         .catch(console.error);
     }
-    else{ // Create a new pug and pass the user into the array
-        console.log("TODO: Create a new pug when current array is filled");
-        // createNewPug(msg.author.username);
+    // If the length is 5, then the next person to enter will complete the PUG rosters
+    else if (pugMembers.length = 5){
+        pugMembers.push(msg.author.username);
+        msg.channel.send(`${msg.author} added to queue ${pugMembers.length}/6.`); // Mention the user that they are added into the queue
+        // msg.reply(' added to queue. ' + `${pugMembers.length}/6`);
+        msg.delete()
+        .then(msg => console.log(pugMembers))
+        .catch(console.error);
+        createTeams();
+    }
+    else{
+        console.log("There was an error!");        
     }
     
+}
+
+function createTeams(){
+    // Shuffle to array of 6 into a random order
+    shuffle(pugMembers);
+    console.log(`Current shifted: ${pugMembers}`);
+    teamA = pugMembers.slice(0,3);
+    teamB = pugMembers.slice(3);
+    
+    console.log("TEAM A: " + teamA);
+    console.log("TEAM B: " + teamB);
+}
+
+// Shuffle the array into random sort
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
 }
 
 client.on('ready', () => {
