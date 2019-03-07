@@ -4,7 +4,7 @@ const client = new Discord.Client();
 const TOKEN = process.env.TOKEN;
 
 const pugSize = 6; // Maximum amount of players in the PUG
-var pugMembers = ["person1", "person2", "person3", "person4","person5"]; // Array to hold the members in the PUG
+var pugMembers = []; // Array to hold the members in the PUG
 var teamA = [];
 var teamB = [];
 var gemMap = "";
